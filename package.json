@@ -1,6 +1,6 @@
 {
   "name": "assemble-webpack",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "Webpack Loader + Plugin for Assemble.io handlebar compilation",
   "main": "index.js",
   "scripts": {
@@ -13,7 +13,7 @@
   "author": "Ravi Roshan",
   "license": "MIT",
   "dependencies": {
-    "assemble": "^0.24.3",
+    "assemble": "0.6.0-beta.5",
     "chalk": "^2.3.0",
     "gulp-extname": "^0.2.2"
   }
