@@ -1,21 +1,9 @@
-// const { resolve } = require('path');
 const chalk = require('chalk');
 const assemble = require('assemble');
 const extname = require('gulp-extname');
 
-// function getAbsolutePathArray(relativePathArray) {
-// 	const absolutePathArray = relativePathArray.map(relativePath => {
-// 		return resolve(relativePath);
-// 	});
-
-// 	console.log('absolutePathArray: ', absolutePathArray);
-// 	return absolutePathArray;
-// }
-
 function handleAssemble(params) {
-	// console.log('assemble: ', assemble);
-
-	console.log(chalk.red.bold('Asseble.io - Starts'));
+	console.log(chalk.black.bold('Asseble.io - Starts'));
 
 	// 1. Base Layout
 	const { baseLayout } = params.queries;
@@ -24,12 +12,8 @@ function handleAssemble(params) {
 
 	// 2. Partials - look for partials from different locations
 	const { partialsLayout } = params.queries;
-	console.log('partialsLayout: ', partialsLayout);
+	// console.log('partialsLayout: ', partialsLayout);
 	assemble.partials(partialsLayout);
-
-	// for (let i = 0; i < partialsLayout.length; i++) {
-	// 	assemble.partials(partialsLayout[i]);
-	// }
 
 	// 3. Data that will be bound to Partials during compile time
 	// const partialsData = getAbsolutePathArray(params.queries.partialsData);
@@ -50,7 +34,7 @@ function handleAssemble(params) {
 		.pipe(extname())
 		.pipe(assemble.dest(outputPath));
 
-	console.log(chalk.red.bold('Asseble.io - Ends'));
+	console.log(chalk.black.bold('Asseble.io - Ends'));
 }
 
 module.exports = {
