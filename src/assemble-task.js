@@ -27,18 +27,18 @@ function handleAssemble(params) {
 	// 5. Output Folder
 	const outputPath = params.webpackConfig.options.output.path;
 
-    app = assemble({
-        options: {
-            layouts: baseLayout,
-            partials: partialsLayout,
-            data: partialsData
-        }
-    });
+    app = assemble();
+
+    app.layouts(baseLayout);
+    app.partials(partialsLayout);
+    app.pages(basePages);
+    app.data(partialsData);
 
 	// 6. Final : Compilation and generating output
 	app
-		.src(basePages)
+		.toStream('pages')
 		.pipe(extname())
+        .pipe(app.renderFile())
 		.pipe(app.dest(outputPath));
 
 	console.log(chalk.black.bold('Asseble.io - Ends'));
