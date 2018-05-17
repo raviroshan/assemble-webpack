@@ -8,6 +8,7 @@ Webpack Loader + Plugin for compiling Handlebars using Assemble.io
 
 # Usage
 
+```js
   const assembleWebpack = require('assemble-webpack');
 
   module.exports = {
@@ -36,6 +37,7 @@ Webpack Loader + Plugin for compiling Handlebars using Assemble.io
       })
     ]
   }
+```
 
 You need Handlebars loader so that Webpack can keep an watch on any change in the required hbs files and **assemble-webpack** will generate the new compiled HTML files.
 
