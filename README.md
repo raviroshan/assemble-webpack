@@ -33,7 +33,8 @@ Webpack Loader + Plugin for compiling Handlebars using Assemble.io
           './web/webroot/WEB-INF/fe-components/**/*.json',
           './web/webroot/WEB-INF/layouts/**/*.json',
           './web/webroot/WEB-INF/pages/**/*.json'
-        ]
+        ],
+        helpers: './web/webroot/WEB-INF/helpers/custom-helpers.js',
       })
     ]
   }
@@ -49,3 +50,4 @@ You need Handlebars loader so that Webpack can keep an watch on any change in th
 |   basePages    | array  | Array of Relative path of Base Pages. These will generate the Actual HTML files as output.                      |
 | partialsLayout | array  | Array of Relative path of HBS partials. These are small components and used inside another components or pages. |
 |  partialsData  | array  | Array of Relative path of JSON data which will be interpolated in HBS components.                               |
+|     helpers    | string | Relative path of custom helpers file.                                                                           |
