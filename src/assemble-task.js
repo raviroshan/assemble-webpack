@@ -24,7 +24,11 @@ function handleAssemble(params) {
   const { basePages } = params.queries;
   console.log('basePages: ', basePages);
 
-  // 5. Output Folder
+  // 5. Helpers
+  const { helpers } = params.queries;
+  console.log('Helpers: ', helpers);
+
+  // 6. Output Folder
   const outputPath = params.webpackConfig.options.output.path;
 
   app = assemble();
@@ -33,6 +37,7 @@ function handleAssemble(params) {
   app.partials(partialsLayout);
   app.pages(basePages);
   app.data(partialsData);
+  app.helpers(helpers);
 
   // 6. Final : Compilation and generating output
   app
