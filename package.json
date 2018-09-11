@@ -1,6 +1,6 @@
 {
   "name": "assemble-webpack",
-  "version": "3.0.3",
+  "version": "3.1.0",
   "description": "Webpack Loader + Plugin for Assemble.io handlebar compilation",
   "main": "index.js",
   "scripts": {
@@ -15,6 +15,7 @@
   "dependencies": {
     "assemble": "0.24.3",
     "chalk": "^2.3.0",
-    "gulp-extname": "^0.2.2"
+    "gulp-extname": "^0.2.2",
+    "gulp-plumber": "^1.2.0"
   }
 }
