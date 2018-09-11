@@ -1,6 +1,7 @@
 const chalk = require('chalk');
 const assemble = require('assemble');
 const extname = require('gulp-extname');
+const plumber = require('gulp-plumber');
 
 let app;
 
@@ -42,6 +43,7 @@ function handleAssemble(params) {
   // 6. Final : Compilation and generating output
   app
     .toStream('pages')
+    .pipe(plumber())
     .pipe(extname())
     .pipe(app.renderFile())
     .pipe(app.dest(outputPath));
