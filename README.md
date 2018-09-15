@@ -1,53 +1,69 @@
-# assemble-webpack
+# 🔩 🛠 assemble-webpack
 
 Webpack Loader + Plugin for compiling Handlebars using Assemble.io
 
+Generates HTML pages using Handlebars templating and Assemble's power.
+
 # Install
 
-  npm install --save-dev assemble-webpack
+`npm install --save-dev assemble-webpack`
 
 # Usage
 
 ```js
-  const assembleWebpack = require('assemble-webpack');
+const assembleWebpack = require('assemble-webpack');
+const handlebarsHelpers = require('handlebars-helpers');
 
-  module.exports = {
-    module: {
-      rules: [
-        {
-          test: /\.(hbs)$/,
-          use: [
-            {
-              loader: 'assemble-webpack'
-            }
-          ]
-        }
-      ]
-    },
-    plugins: [
-      new assembleWebpack.AttachedPlugin({
-        baseLayout: './web/webroot/WEB-INF/layouts/base.hbs',
-        basePages: ['./web/webroot/WEB-INF/pages/**/*.hbs'],
-        partialsLayout: ['./web/webroot/WEB-INF/fe-components/**/*.hbs'],
-        partialsData: [
-          './web/webroot/WEB-INF/fe-components/**/*.json',
-          './web/webroot/WEB-INF/layouts/**/*.json',
-          './web/webroot/WEB-INF/pages/**/*.json'
-        ],
-        helpers: './web/webroot/WEB-INF/helpers/custom-helpers.js',
-      })
+module.exports = {
+  // webpack configurations
+  module: {
+    rules: [
+      {
+        test: /\.(hbs)$/,
+        use: [
+          {
+            loader: 'assemble-webpack'
+          }
+        ]
+      }
     ]
-  }
+  },
+
+  plugins: [
+    new assembleWebpack.AttachedPlugin({
+      baseLayout: ['./src/app/layouts/**/*.hbs'],
+      basePages: ['./src/app/pages/**/*.hbs'],
+      partialsLayout: ['./src/app/fe-components/**/*.hbs'],
+      partialsData: [
+        './src/app/fe-components/**/*.json',
+        './src/app/layouts/**/*.json',
+        './src/app/pages/**/*.json'
+      ],
+      helpers: [handlebarsHelpers(), './src/app/helpers/custom-helpers.js']
+    })
+  ]
+};
 ```
 
-You need Handlebars loader so that Webpack can keep an watch on any change in the required hbs files and **assemble-webpack** will generate the new compiled HTML files.
+# Configuration Options & Details
 
-# Options
+|      Name      | Type  | Description                                                                                                                |
+| :------------: | ----- | -------------------------------------------------------------------------------------------------------------------------- |
+|   baseLayout   | array | Relative path of Base Layout files considered as Main template. It acts as HTML skeleton and used by the actual basePages. |
+|   basePages    | array | Relative path of Base Pages. These will generate the Actual HTML files as an output                                        |
+| partialsLayout | array | Relative path of HBS partials. These are smaller re-usable components and can used inside another components or pages      |
+|  partialsData  | array | Relative path of JSON data which will be interpolated in HBS components.                                                   |
+|    helpers     | array | Relative path of custom helpers files                                                                                      |
 
-|      Name      | Type   | Description                                                                                                     |
-| :------------: | ------ | --------------------------------------------------------------------------------------------------------------- |
-|   baseLayout   | string | Relative path of Base Layout file considered as Main template. It comprise of HTML skeleton.                    |
-|   basePages    | array  | Array of Relative path of Base Pages. These will generate the Actual HTML files as output.                      |
-| partialsLayout | array  | Array of Relative path of HBS partials. These are small components and used inside another components or pages. |
-|  partialsData  | array  | Array of Relative path of JSON data which will be interpolated in HBS components.                               |
-|     helpers    | string | Relative path of custom helpers file.                                                                           |
+# Important Points
+
+- `assembleWebpack` is used as a plugin to provide the required configurations and to compile handlebar files using assembler.io during Webpack build.
+- We also need `assemble-webpack` as a loader to compile Handlebars files with extension `hbs`
+
+**Note**: Until you link the required resources in your project's dependency graph, Webpack will NOT be able to track it for any changes during `Watch` mode or while running `Webpack-dev-server`.
+
+So even though `assembleWebpack` plugin generates the output during Webpack build, you still need to explicitly `import/require` the Handlebar resources somewhere in your project so that it can be re-compiled on the respective file changes.
+
+# Demo/Example
+
+You can refer https://github.com/raviroshan/assemble-webpack-demo
