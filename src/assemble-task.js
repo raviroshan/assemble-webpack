@@ -3,36 +3,37 @@ const assemble = require('assemble');
 const extname = require('gulp-extname');
 const plumber = require('gulp-plumber');
 
-let app;
-
 function handleAssemble(params) {
   console.log(chalk.black.bold('Asseble.io - Starts'));
 
-  // 1. Base Layout
-  const { baseLayout } = params.queries;
+  const {
+    queries: { baseLayout, partialsLayout, basePages, partialsData, helpers },
+    webpackConfig: {
+      options: {
+        output: { path: outputPath }
+      }
+    }
+  } = params;
+
+  // 1. Base Layout : Acts as skeleton for different pages
   console.log('baseLayout: ', baseLayout);
 
-  // 2. Partials - look for partials from different locations
-  const { partialsLayout } = params.queries;
+  // 2. Partials : partials/components from different locations
   console.log('partialsLayout: ', partialsLayout);
 
-  // 3. Data that will be bound to Partials during compile time
-  // const partialsData = getAbsolutePathArray(params.queries.partialsData);
-  const { partialsData } = params.queries;
-  console.log('partialsData: ', partialsData);
-
-  // 4. Pages
-  const { basePages } = params.queries;
+  // 3. Pages : The actual HTML pages created based on baseLayout and using partials/components
   console.log('basePages: ', basePages);
 
-  // 5. Helpers
-  const { helpers } = params.queries;
+  // 4. Data that will be bound to Partials during compile time
+  console.log('partialsData: ', partialsData);
+
+  // 5. Helpers Functions
   console.log('Helpers: ', helpers);
 
-  // 6. Output Folder
-  const outputPath = params.webpackConfig.options.output.path;
+  // 6. Output Folder for generating the HTML
+  console.log('outputPath: ', outputPath);
 
-  app = assemble();
+  const app = assemble();
 
   app.layouts(baseLayout);
   app.partials(partialsLayout);
