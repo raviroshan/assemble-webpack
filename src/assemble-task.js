@@ -4,7 +4,7 @@ const extname = require('gulp-extname');
 const plumber = require('gulp-plumber');
 
 function handleAssemble(params) {
-  console.log(chalk.black.bold('Asseble.io - Starts'));
+  console.log(chalk.black.bold('Assemble.io - Starts'));
 
   const {
     queries: { baseLayout, partialsLayout, basePages, partialsData, helpers },
@@ -49,7 +49,7 @@ function handleAssemble(params) {
     .pipe(app.renderFile())
     .pipe(app.dest(outputPath));
 
-  console.log(chalk.black.bold('Asseble.io - Ends'));
+  console.log(chalk.black.bold('Assemble.io - Ends'));
 }
 
 module.exports = {
