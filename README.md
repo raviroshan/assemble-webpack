@@ -1,4 +1,6 @@
+
 # 🔩 🛠 assemble-webpack
+Thanks to Ravi Roshan for building this loader. I had to fork this repo to add more features to it.
 
 Webpack Loader + Plugin for compiling Handlebars using Assemble.io
 
@@ -63,6 +65,10 @@ module.exports = {
 **Note**: Until you link the required resources in your project's dependency graph, Webpack will NOT be able to track it for any changes during `Watch` mode or while running `Webpack-dev-server`.
 
 So even though `assembleWebpack` plugin generates the output during Webpack build, you still need to explicitly `import/require` the Handlebar resources somewhere in your project so that it can be re-compiled on the respective file changes.
+
+# Credits
+
+The repo is forked from https://github.com/raviroshan/assemble-webpack 
 
 # Demo/Example
 
